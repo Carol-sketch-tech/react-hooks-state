@@ -1,0 +1,76 @@
+React state.
+- working with state is one of the most crucial elements of creating dynamic react applications,
+- state is data that is dynamic in your component.it changes overtime as users interact with the application.
+a componenets state unlike a componenets prop can shnge during the components life.
+- - state provides a way in shich we maintain and update information within a component without requiring its parent to somehow send updated information.
+
+
+useState.
+-state is always inside react's internal code. one must frist tell React to create some state for the component.
+to do this we must first import a function from react called useState. 
+useState is a react hook that eill letus "hook into" Reacts internal state inside our fucntional component.
+import React, {useState} from "react"
+
+initializing state.
+calling the imported state function inside our component.
+ import React,{useState} from "react"
+
+ function Counter(){
+    const [count, setCount]=useState(0);
+    return <button>{count}</button>
+ }
+
+ - when we call useState(0)inseide the function component, were telling reactto create a new internal stae for our component with an initial value of 0(or whatever value we pass
+ to useState when we call it.).
+ - use state will return an array with tow variable inside of it :
+ 1. count- a reference to the current value of that state in React's internals
+ 2. setCount- a setter function so we can update that state.
+
+ - we could create the varibale and set their values by accessing the elements from the array individually like this:
+
+
+   import React,{useState} from "react"
+
+   function Counter(){
+    const[count, setCount]= useState(0)
+    the line of code above is the same as the three lines of code below,
+      const CountState = useState(0);
+      const count= countState[0];
+      const setCount= countstate[1];
+      return <button>{count}</button>
+   }
+
+   Setting state.
+   - the setter function we getback from calling useState is straightforward in its purpose: it sets/updates states.
+   -  whenever we want to update state we can just call the setter function in this case setCount.
+
+   function Counter(){
+    const [count, setCount]= useState(0)
+
+    function increament(){
+        setCount(count + 1);
+    }
+    return <button onClick={increment}>{count}</button>
+   }
+
+- Setting state is Asynchronous.
+while using the setCount function is straightforward enough, there is one very important caveat about how it functions that we need to explore.
+using setFunctionName sets state asynchronously.
+ example of a state setter function being used in a componenets
+ 
+ function Counter(){
+    const [count, setCount]= useState(0)
+     function increament(){
+        console.log(`before setState: ${count}`);
+         setCount(count + 1);
+          console.log(`after setState: ${count}`)
+     }
+
+     return <div onClick={increament}>{count}</div>
+ }
+
+ NOTE- anytime you need to set state based in the current calue of state, you should use the callback syntax.
+
+ Rules of hooks.
+ do not call hooks inside loops, conditions or nested functions.
+ 
